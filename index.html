@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIEGOMOTOPECAS | Peças, Acessórios e Alta Performance para sua Moto</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        diego: {
+                            orange: '#FF5500',
+                            orangeHover: '#E04B00',
+                            yellow: '#FFB800',
+                            dark: '#0A0C10',
+                            card: '#14171F',
+                            cardHover: '#1B202B',
+                            border: '#262B36',
+                            muted: '#8E96A5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0C10;
+            color: #F3F4F6;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0C10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262B36;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5500;
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(255, 85, 0, 0.35);
+        }
+        .neon-glow-hover:hover {
+            box-shadow: 0 0 25px rgba(255, 85, 0, 0.55);
+        }
+        .skew-tag {
+            transform: skewX(-12deg);
+        }
+        .unskew {
+            transform: skewX(12deg);
+        }
+        /* Toast animation */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast-animate {
+            animation: slideInRight 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-diego-orange selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-diego-orange via-orange-500 to-diego-yellow text-black font-extrabold text-xs py-2 px-4 text-center tracking-wider flex items-center justify-center gap-2 shadow-md">
+        <i class="fa-solid fa-bolt-lightning text-sm animate-bounce"></i>
+        <span>CUPOM <strong class="bg-black text-white px-2 py-0.5 rounded text-[11px] tracking-widest uppercase ml-1">DIEGO10</strong> PARA 10% OFF + FRETE GRÁTIS ACIMA DE R$ 299!</span>
+        <i class="fa-solid fa-bolt-lightning text-sm animate-bounce"></i>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-40 bg-diego-dark/95 backdrop-blur-md border-b border-diego-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex items-center justify-between gap-4">
+                
+                <!-- Logo DIEGOMOTOPECAS -->
+                <a href="#" class="flex items-center gap-2.5 text-2xl sm:text-3xl font-black italic tracking-wider text-white group shrink-0">
+                    <div class="bg-diego-orange text-black p-2 rounded-xl skew-tag group-hover:bg-white transition-colors duration-300">
+                        <i class="fa-solid fa-gauge-high unskew text-xl sm:text-2xl"></i>
+                    </div>
+                    <span class="tracking-tighter">DIEGO<span class="text-diego-orange">MOTOPEÇAS</span></span>
+                </a>
+
+                <!-- Desktop Search Bar -->
+                <div class="flex-1 max-w-xl relative hidden md:block">
+                    <div class="relative">
+                        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Busque por produto, marca ou código (Ex: Escapamento, Akrapovic, Cobreq)..." 
+                            class="w-full bg-diego-card border border-diego-border text-white text-sm rounded-xl pl-10 pr-10 py-2.5 focus:outline-none focus:border-diego-orange transition placeholder:text-diego-muted">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-diego-muted"></i>
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-diego-muted hover:text-white">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Live Search Dropdown -->
+                    <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 bg-diego-card border border-diego-border mt-2 rounded-xl shadow-2xl z-50 max-h-80 overflow-y-auto"></div>
+                </div>
+
+                <!-- Action Buttons Right -->
+                <div class="flex items-center gap-3">
+                    <!-- WhatsApp Direct Contact -->
+                    <a href="https://wa.me/5511999999999?text=Olá%20DIEGOMOTOPEÇAS!%20Preciso%20de%20ajuda%20para%20escolher%20uma%20peça" target="_blank" 
+                       class="hidden lg:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 px-3.5 rounded-xl transition shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Atendimento</span>
+                    </a>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="openWishlistModal()" class="relative p-2.5 text-gray-300 hover:text-diego-orange bg-diego-card border border-diego-border hover:border-diego-orange/50 rounded-xl transition">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        <span id="wishlistBadge" class="hidden absolute -top-1.5 -right-1.5 bg-diego-orange text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-diego-dark">0</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger -->
+                    <button onclick="toggleCartDrawer()" class="relative flex items-center gap-2.5 bg-diego-orange hover:bg-diego-orangeHover text-white font-black py-2.5 px-4 rounded-xl transition neon-glow">
+                        <div class="relative">
+                            <i class="fa-solid fa-cart-shopping text-lg"></i>
+                            <span id="cartBadge" class="absolute -top-3 -right-3 bg-black text-diego-orange text-xs font-black w-5 h-5 rounded-full flex items-center justify-center border border-diego-orange">0</span>
+                        </div>
+                        <span class="hidden sm:inline text-xs uppercase tracking-wider" id="cartHeaderTotal">R$ 0,00</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="mt-3 md:hidden">
+                <div class="relative">
+                    <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="Buscar peças, capacetes, marcas..." 
+                        class="w-full bg-diego-card border border-diego-border text-white text-sm rounded-xl pl-10 pr-4 py-2 focus:outline-none focus:border-diego-orange">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-diego-muted"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner & Interactive Garage Section -->
+    <section class="relative bg-gradient-to-b from-diego-dark via-diego-card to-diego-dark py-10 lg:py-16 border-b border-diego-border overflow-hidden">
+        <!-- Grid Pattern Overlay -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#FF5500_1px,transparent_1px)] [background-size:20px_20px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Hero Text Content -->
+            <div class="lg:col-span-7">
+                <span class="inline-flex items-center gap-2 bg-diego-orange/10 border border-diego-orange/30 text-diego-orange text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest mb-4">
+                    <i class="fa-solid fa-circle text-[8px] animate-ping"></i> A Loja Oficial do Motociclista Exigente
+                </span>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black italic tracking-tight text-white uppercase leading-none">
+                    Performance & <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-diego-orange via-orange-400 to-diego-yellow">Peças Originais</span>
+                </h1>
+                <p class="mt-4 text-diego-muted text-sm sm:text-base max-w-xl leading-relaxed">
+                    Na <strong>DIEGOMOTOPECAS</strong> você encontra os melhores escapamentos, kits de transmissão, freios de alta performance e acessórios com envio em até 24h e suporte especializado de mecânicos.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#vitrine" class="bg-diego-orange hover:bg-diego-orangeHover text-white font-black px-6 py-3.5 rounded-xl transition flex items-center gap-2 uppercase tracking-wider text-xs neon-glow">
+                        <i class="fa-solid fa-fire text-base"></i> Ver Ofertas em Destaque
+                    </a>
+                    <a href="#garagem" class="bg-diego-card border border-diego-border hover:border-diego-orange text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 text-xs">
+                        <i class="fa-solid fa-motorcycle text-diego-orange text-base"></i> Filtrar pela Minha Moto
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bike Compatibility Widget (Garage) -->
+            <div id="garagem" class="lg:col-span-5 bg-diego-card/90 backdrop-blur-md border border-diego-border rounded-2xl p-6 shadow-2xl relative">
+                <div class="flex items-center gap-3 border-b border-diego-border pb-4 mb-4">
+                    <div class="bg-diego-orange/20 p-3 rounded-xl text-diego-orange">
+                        <i class="fa-solid fa-sliders text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-white text-base uppercase tracking-wide">Busca por Compatibilidade</h2>
+                        <p class="text-xs text-diego-muted">Encontre peças sob medida para o seu modelo</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-diego-muted uppercase tracking-wider mb-1">1. MARCA DA MOTO</label>
+                        <select id="selectBrand" onchange="updateModelOptions()" class="w-full bg-diego-dark border border-diego-border text-white text-xs font-medium rounded-xl p-3 focus:border-diego-orange focus:outline-none transition">
+                            <option value="">Selecione a Marca (Ex: Honda, Yamaha...)</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Yamaha">Yamaha</option>
+                            <option value="Kawasaki">Kawasaki</option>
+                            <option value="BMW">BMW</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-extrabold text-diego-muted uppercase tracking-wider mb-1">2. MODELO</label>
+                            <select id="selectModel" onchange="updateYearOptions()" class="w-full bg-diego-dark border border-diego-border text-white text-xs font-medium rounded-xl p-3 focus:border-diego-orange focus:outline-none transition disabled:opacity-50" disabled>
+                                <option value="">Selecione a Marca</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-extrabold text-diego-muted uppercase tracking-wider mb-1">3. ANO</label>
+                            <select id="selectYear" class="w-full bg-diego-dark border border-diego-border text-white text-xs font-medium rounded-xl p-3 focus:border-diego-orange focus:outline-none transition disabled:opacity-50" disabled>
+                                <option value="">Selecione o Modelo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 flex gap-2">
+                    <button onclick="applyBikeFilter()" class="flex-1 bg-diego-orange hover:bg-diego-orangeHover text-white font-extrabold py-3 rounded-xl text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-filter"></i> Aplicar Filtro de Moto
+                    </button>
+                    <button onclick="resetBikeFilter()" class="bg-diego-dark border border-diego-border hover:border-diego-orange text-diego-muted hover:text-white py-3 px-4 rounded-xl text-xs transition">
+                        Limpar
+                    </button>
+                </div>
+
+                <div id="activeBikeBanner" class="hidden mt-4 p-3 bg-diego-orange/15 border border-diego-orange/40 rounded-xl text-xs text-diego-orange flex items-center justify-between font-bold">
+                    <span id="activeBikeText"></span>
+                    <i class="fa-solid fa-circle-check text-base"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Differentials Section -->
+    <section class="bg-diego-card border-b border-diego-border py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-diego-orange/10 border border-diego-orange/30 flex items-center justify-center text-diego-orange text-xl shrink-0">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-white">Despacho Expresso</h3>
+                    <p class="text-[11px] text-diego-muted">Envio garantido em até 24 horas</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-diego-orange/10 border border-diego-orange/30 flex items-center justify-center text-diego-orange text-xl shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-white">Encaixe Perfeito</h3>
+                    <p class="text-[11px] text-diego-muted">Garantia total de compatibilidade</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-diego-orange/10 border border-diego-orange/30 flex items-center justify-center text-diego-orange text-xl shrink-0">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-white">Suporte Mecânico</h3>
+                    <p class="text-[11px] text-diego-muted">Tire dúvidas com especialistas</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl shrink-0">
+                    <i class="fa-solid fa-pix"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-white">10% OFF no PIX</h3>
+                    <p class="text-[11px] text-diego-muted">Aproveite desconto imediato</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Pills Section -->
+    <section class="py-6 bg-diego-dark border-b border-diego-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-[11px] font-black uppercase tracking-widest text-diego-muted mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-tags text-diego-orange"></i> Categorias de Produtos
+            </h2>
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="categoryPills">
+                <!-- Javascript dynamic population -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Showcase -->
+    <main class="py-10 flex-1" id="vitrine">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Controls Bar (Sorting & Counter) -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-diego-border">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black italic uppercase tracking-wider text-white">
+                        Catálogo de <span class="text-diego-orange">Peças & Acessórios</span>
+                    </h2>
+                    <p class="text-xs text-diego-muted mt-1" id="productCountText">Carregando catálogo...</p>
+                </div>
+
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <label class="text-xs text-diego-muted shrink-0 font-bold uppercase tracking-wider">Ordenar por:</label>
+                    <select id="sortSelect" onchange="renderProducts()" class="bg-diego-card border border-diego-border text-white text-xs font-semibold rounded-xl p-2.5 focus:border-diego-orange focus:outline-none w-full sm:w-auto">
+                        <option value="featured">Destaques DIEGOMOTOPECAS</option>
+                        <option value="price-asc">Menor Preço</option>
+                        <option value="price-desc">Maior Preço</option>
+                        <option value="rating">Melhores Avaliações</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamic Content Generated by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-16 bg-diego-card rounded-2xl border border-diego-border my-8">
+                <i class="fa-solid fa-triangle-exclamation text-4xl text-diego-orange mb-3"></i>
+                <h3 class="text-lg font-bold text-white">Nenhuma peça encontrada com estes filtros</h3>
+                <p class="text-xs text-diego-muted mt-1">Tente selecionar outro modelo de moto ou mudar a busca por palavra-chave.</p>
+                <button onclick="resetAllFilters()" class="mt-5 bg-diego-orange text-white font-extrabold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider">
+                    Limpar Todos os Filtros
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Testimonials Section -->
+    <section class="py-14 bg-diego-card border-t border-b border-diego-border relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-diego-orange font-black text-xs uppercase tracking-widest">Opinião de quem entende</span>
+                <h2 class="text-2xl sm:text-3xl font-black italic uppercase text-white mt-1">
+                    Quem Compra na <span class="text-diego-orange">DIEGOMOTOPECAS</span> Aprova
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-diego-dark border border-diego-border p-6 rounded-2xl relative">
+                    <div class="flex text-diego-yellow text-xs mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-300 italic leading-relaxed">
+                        "Comprei o escapamento esportivo pra minha MT-07 e o kit de transmissão D.I.D. O Diego me auxiliou pelo WhatsApp no mesmo minuto. Peças 100% originais e de alto nível!"
+                    </p>
+                    <div class="mt-5 flex items-center gap-3 pt-4 border-t border-diego-border/50">
+                        <div class="w-10 h-10 rounded-full bg-diego-orange/20 border border-diego-orange/40 text-diego-orange font-black flex items-center justify-center text-xs">
+                            RM
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-white">Renato "Piloto" Mendes</p>
+                            <p class="text-[10px] text-diego-muted">Yamaha MT-07 • São Paulo - SP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-diego-dark border border-diego-border p-6 rounded-2xl relative">
+                    <div class="flex text-diego-yellow text-xs mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-300 italic leading-relaxed">
+                        "Uso minha Titan 160 pra trabalhar o dia todo. O filtro por moto da DIEGOMOTOPECAS facilitou demais pra comprar as pastilhas Cobreq certas. Chegou em menos de 48h!"
+                    </p>
+                    <div class="mt-5 flex items-center gap-3 pt-4 border-t border-diego-border/50">
+                        <div class="w-10 h-10 rounded-full bg-diego-orange/20 border border-diego-orange/40 text-diego-orange font-black flex items-center justify-center text-xs">
+                            CS
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-white">Carlos Silva</p>
+                            <p class="text-[10px] text-diego-muted">Honda Titan 160 • Campinas - SP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-diego-dark border border-diego-border p-6 rounded-2xl relative">
+                    <div class="flex text-diego-yellow text-xs mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-gray-300 italic leading-relaxed">
+                        "Loja de extrema confiança! Preço no PIX imbatível e o suporte técnico me ajudou na escolha do óleo correto pra revisão da XRE 300. Nota 10!"
+                    </p>
+                    <div class="mt-5 flex items-center gap-3 pt-4 border-t border-diego-border/50">
+                        <div class="w-10 h-10 rounded-full bg-diego-orange/20 border border-diego-orange/40 text-diego-orange font-black flex items-center justify-center text-xs">
+                            FL
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-white">Fernando Lima</p>
+                            <p class="text-[10px] text-diego-muted">Honda XRE 300 • Belo Horizonte - MG</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-diego-card border border-diego-border rounded-2xl max-w-2xl w-full p-6 relative shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-diego-muted hover:text-white bg-diego-dark rounded-full w-8 h-8 flex items-center justify-center border border-diego-border">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+            <div id="quickViewContent" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                <!-- Dynamic Content via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div id="wishlistModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-diego-card border border-diego-border rounded-2xl max-w-lg w-full p-6 relative shadow-2xl max-h-[80vh] overflow-y-auto">
+            <button onclick="closeWishlistModal()" class="absolute top-4 right-4 text-diego-muted hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-black text-white mb-4 flex items-center gap-2 uppercase italic">
+                <i class="fa-solid fa-heart text-diego-orange"></i> Lista de Desejos DIEGOMOTOPECAS
+            </h3>
+            <div id="wishlistList" class="space-y-3">
+                <!-- JS Population -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer (Right Side) -->
+    <div id="cartDrawer" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity">
+        <div class="absolute inset-y-0 right-0 max-w-md w-full bg-diego-card border-l border-diego-border shadow-2xl flex flex-col justify-between">
+            
+            <!-- Cart Header -->
+            <div class="p-5 border-b border-diego-border flex items-center justify-between bg-diego-dark">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-cart-shopping text-diego-orange text-xl"></i>
+                    <h3 class="font-black text-white text-base uppercase tracking-wider italic">Meu Carrinho</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-diego-muted hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsList" class="p-4 overflow-y-auto flex-1 space-y-3">
+                <!-- Dynamic JS Items -->
+            </div>
+
+            <!-- Cart Footer (Totals, Coupon, Freight, Checkout) -->
+            <div class="p-5 border-t border-diego-border bg-diego-dark space-y-4">
+                
+                <!-- Coupon Input -->
+                <div class="flex gap-2">
+                    <input type="text" id="couponInput" placeholder="Possui Cupom? (Ex: DIEGO10)" 
+                           class="flex-1 bg-diego-card border border-diego-border text-xs text-white rounded-xl px-3 py-2 uppercase tracking-wider focus:outline-none focus:border-diego-orange">
+                    <button onclick="applyCoupon()" class="bg-diego-card border border-diego-border hover:border-diego-orange text-white text-xs font-bold px-4 py-2 rounded-xl transition">
+                        Aplicar
+                    </button>
+                </div>
+                <p id="couponMsg" class="text-[11px] font-bold hidden"></p>
+
+                <!-- Shipping Calculator -->
+                <div class="bg-diego-card p-3 rounded-xl border border-diego-border">
+                    <label class="block text-[11px] font-bold text-diego-muted mb-1 uppercase tracking-wider">Simular Frete por CEP</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="cepInput" placeholder="Digite seu CEP (ex: 01001000)" 
+                            class="flex-1 bg-diego-dark border border-diego-border text-xs text-white rounded-lg px-3 py-1.5 focus:outline-none focus:border-diego-orange">
+                        <button onclick="calculateShipping()" class="bg-diego-border hover:bg-gray-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                            Calcular
+                        </button>
+                    </div>
+                    <p id="shippingResult" class="text-[11px] text-emerald-400 mt-1.5 font-bold hidden"></p>
+                </div>
+
+                <!-- Price Summary -->
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between text-diego-muted">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal" class="font-bold text-white">R$ 0,00</span>
+                    </div>
+                    <div id="couponDiscountRow" class="hidden flex justify-between text-emerald-400 font-bold">
+                        <span>Cupom Desconto (10%):</span>
+                        <span id="cartCouponDiscount">- R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between text-diego-muted">
+                        <span>Frete:</span>
+                        <span id="cartShippingValue" class="font-bold text-white">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between text-emerald-400 font-bold">
+                        <span>Desconto Especial PIX (10%):</span>
+                        <span id="cartPixDiscount">- R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between text-white text-lg font-black pt-2 border-t border-diego-border">
+                        <span>TOTAL NO PIX:</span>
+                        <span id="cartTotal" class="text-diego-orange">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- Checkout Actions -->
+                <div class="grid grid-cols-1 gap-2 pt-1">
+                    <button onclick="checkoutWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Finalizar pelo WhatsApp
+                    </button>
+                    <button onclick="openSimulationCheckout()" class="bg-diego-orange hover:bg-diego-orangeHover text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition neon-glow">
+                        <i class="fa-solid fa-credit-card"></i> Pagar Agora (PIX / Cartão)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulation Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-diego-card border border-diego-border rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-diego-muted hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-xl font-black text-white italic uppercase mb-1">Pagamento <span class="text-diego-orange">DIEGOMOTOPECAS</span></h3>
+            <p class="text-xs text-diego-muted mb-4">Escolha sua forma preferida para concluir o pedido simulado:</p>
+
+            <div class="space-y-3 mb-6">
+                <label class="flex items-center gap-3 p-3.5 bg-diego-dark border border-diego-border rounded-xl cursor-pointer hover:border-diego-orange transition">
+                    <input type="radio" name="payMethod" value="pix" checked class="accent-diego-orange">
+                    <i class="fa-solid fa-pix text-emerald-400 text-2xl"></i>
+                    <div>
+                        <p class="text-xs font-black text-white">PIX Imediato (10% OFF)</p>
+                        <p class="text-[10px] text-diego-muted">Aprovação em segundos</p>
+                    </div>
+                </label>
+                <label class="flex items-center gap-3 p-3.5 bg-diego-dark border border-diego-border rounded-xl cursor-pointer hover:border-diego-orange transition">
+                    <input type="radio" name="payMethod" value="card" class="accent-diego-orange">
+                    <i class="fa-solid fa-credit-card text-diego-orange text-2xl"></i>
+                    <div>
+                        <p class="text-xs font-black text-white">Cartão de Crédito</p>
+                        <p class="text-[10px] text-diego-muted">Em até 12x no cartão</p>
+                    </div>
+                </label>
+            </div>
+
+            <button onclick="confirmSimulatedOrder()" class="w-full bg-diego-orange hover:bg-diego-orangeHover text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider transition neon-glow">
+                Confirmar e Simular Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Footer Section -->
+    <footer class="bg-diego-dark border-t border-diego-border pt-14 pb-8 text-diego-muted text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <div>
+                <a href="#" class="flex items-center gap-2 text-2xl font-black italic text-white mb-4">
+                    <div class="bg-diego-orange text-black p-1.5 rounded-lg skew-tag">
+                        <i class="fa-solid fa-gauge-high unskew text-lg"></i>
+                    </div>
+                    <span>DIEGO<span class="text-diego-orange">MOTOPEÇAS</span></span>
+                </a>
+                <p class="text-diego-muted leading-relaxed">
+                    Sua loja referência nacional em peças de motor, suspensão, freios, kits de transmissão e acessórios para motocicletas de baixa, média e alta cilindrada.
+                </p>
+                <div class="flex gap-3 mt-4 text-base">
+                    <a href="#" class="w-8 h-8 rounded-lg bg-diego-card border border-diego-border flex items-center justify-center text-white hover:text-diego-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-lg bg-diego-card border border-diego-border flex items-center justify-center text-white hover:text-diego-orange transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-lg bg-diego-card border border-diego-border flex items-center justify-center text-white hover:text-diego-orange transition"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-4 border-l-2 border-diego-orange pl-2">Categorias Principais</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="#vitrine" onclick="filterByCategory('Transmissão')" class="hover:text-diego-orange transition">Kits de Transmissão / Relação</a></li>
+                    <li><a href="#vitrine" onclick="filterByCategory('Escapamento')" class="hover:text-diego-orange transition">Escapamentos Esportivos</a></li>
+                    <li><a href="#vitrine" onclick="filterByCategory('Freios')" class="hover:text-diego-orange transition">Pastilhas e Discos de Freio</a></li>
+                    <li><a href="#vitrine" onclick="filterByCategory('Pneus')" class="hover:text-diego-orange transition">Pneus de Alta Performance</a></li>
+                    <li><a href="#vitrine" onclick="filterByCategory('Equipamentos')" class="hover:text-diego-orange transition">Capacetes e Luvas</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-4 border-l-2 border-diego-orange pl-2">Atendimento & Suporte</h4>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i> (11) 99999-9999</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-diego-orange text-sm"></i> contato@diegomotopecas.com.br</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-diego-orange text-sm"></i> Av. dos Motoqueiros, 1000 - SP</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-diego-orange text-sm"></i> Seg a Sex: 08h às 18h | Sáb: 08h às 13h</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-4 border-l-2 border-diego-orange pl-2">Pagamento Seguro</h4>
+                <p class="text-diego-muted mb-3">Aceitamos as melhores formas de pagamento com aprovação ágil:</p>
+                <div class="flex flex-wrap gap-2 text-xl">
+                    <div class="bg-diego-card p-2 rounded-lg border border-diego-border text-emerald-400" title="PIX"><i class="fa-solid fa-pix"></i></div>
+                    <div class="bg-diego-card p-2 rounded-lg border border-diego-border text-blue-400" title="Visa"><i class="fa-brands fa-cc-visa"></i></div>
+                    <div class="bg-diego-card p-2 rounded-lg border border-diego-border text-red-500" title="Mastercard"><i class="fa-brands fa-cc-mastercard"></i></div>
+                    <div class="bg-diego-card p-2 rounded-lg border border-diego-border text-white" title="Boleto"><i class="fa-solid fa-barcode"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-diego-border/60 pt-6 text-center text-diego-muted">
+            <p>© 2026 DIEGOMOTOPECAS. Todos os direitos reservados. CNPJ: 00.000.000/0001-00.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           PRODUCT DATABASE
+           ========================================================================== */
+        const products = [
+            {
+                id: 1,
+                name: "Kit Relação Transmissão Aço 1045 com Retentor O-Ring",
+                brand: "D.I.D",
+                category: "Transmissão",
+                priceOriginal: 299.90,
+                pricePix: 254.90,
+                rating: 5.0,
+                reviewsCount: 64,
+                image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Honda", model: "Titan 160", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"] },
+                    { brand: "Honda", model: "Fan 160", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"] }
+                ],
+                description: "Kit de transmissão reforçado fabricado em liga de Aço 1045 com corrente de retentores de alta durabilidade para encarar o dia a dia."
+            },
+            {
+                id: 2,
+                name: "Escapamento Esportivo DORE Racing Inox Full System",
+                brand: "DORE",
+                category: "Escapamento",
+                priceOriginal: 1290.00,
+                pricePix: 1099.00,
+                rating: 4.9,
+                reviewsCount: 38,
+                image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Honda", model: "Titan 160", years: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"] },
+                    { brand: "Honda", model: "XRE 300", years: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"] },
+                    { brand: "Yamaha", model: "Fazer 250", years: ["2018", "2019", "2020", "2021", "2022", "2023"] }
+                ],
+                description: "Escapamento completo em Aço Inox com ronco grave, ganho real de torque e potência na curva de aceleração."
+            },
+            {
+                id: 3,
+                name: "Pastilha de Freio Dianteira Cerâmica Performance",
+                brand: "Cobreq",
+                category: "Freios",
+                priceOriginal: 89.90,
+                pricePix: 71.90,
+                rating: 4.8,
+                reviewsCount: 112,
+                image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Honda", model: "Titan 160", years: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"] },
+                    { brand: "Yamaha", model: "Fazer 250", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"] },
+                    { brand: "Kawasaki", model: "Ninja 400", years: ["2019", "2020", "2021", "2022", "2023"] }
+                ],
+                description: "Composto cerâmico de baixa abrasão que preserva o disco de freio e entrega frenagens seguras mesmo sob chuva."
+            },
+            {
+                id: 4,
+                name: "Pneu Traseiro 180/55-17 Diablo Rosso IV Esportivo",
+                brand: "Pirelli",
+                category: "Pneus",
+                priceOriginal: 1150.00,
+                pricePix: 980.00,
+                rating: 5.0,
+                reviewsCount: 29,
+                image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Yamaha", model: "MT-07", years: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"] },
+                    { brand: "BMW", model: "S1000RR", years: ["2018", "2019", "2020", "2021", "2022", "2023"] }
+                ],
+                description: "Aderência superior em curvas extremas, composto Bi-Goma e estabilidade em altas velocidades."
+            },
+            {
+                id: 5,
+                name: "Capacete Fechado Escamoteável Agv K1 Gothic Matte",
+                brand: "AGV",
+                category: "Equipamentos",
+                priceOriginal: 1890.00,
+                pricePix: 1599.00,
+                rating: 4.9,
+                reviewsCount: 45,
+                image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [], // Universal
+                description: "Casco aerodinâmico em resina termoplástica de alta resistência, campo de visão panorama de 190° e fecho duplo D."
+            },
+            {
+                id: 6,
+                name: "Óleo 10W30 Sintético Ultimate Racing 1 Litro",
+                brand: "Motul",
+                category: "Motor",
+                priceOriginal: 75.00,
+                pricePix: 59.90,
+                rating: 4.9,
+                reviewsCount: 320,
+                image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Honda", model: "Titan 160", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"] },
+                    { brand: "Honda", model: "XRE 300", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"] }
+                ],
+                description: "Lubrificante 100% sintético desenvolvido com tecnologia Ester Core para máxima proteção do motor e câmbio."
+            },
+            {
+                id: 7,
+                name: "Amortecedor Traseiro a Gás Nitrogênio Monoshock",
+                brand: "Pro Tork",
+                category: "Suspensão",
+                priceOriginal: 480.00,
+                pricePix: 399.00,
+                rating: 4.7,
+                reviewsCount: 22,
+                image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Yamaha", model: "Fazer 250", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"] },
+                    { brand: "Honda", model: "XRE 300", years: ["2015", "2016", "2017", "2018", "2019", "2020"] }
+                ],
+                description: "Absorção imediata de irregularidades, ajuste de pré-carga e haste com tratamento cromo duro."
+            },
+            {
+                id: 8,
+                name: "Protetor de Cárter e Carenagem com Pedaleiras",
+                brand: "Scam",
+                category: "Acessórios",
+                priceOriginal: 380.00,
+                pricePix: 319.00,
+                rating: 5.0,
+                reviewsCount: 51,
+                image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&auto=format&fit=crop&q=60",
+                compatibleBikes: [
+                    { brand: "Honda", model: "XRE 300", years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"] },
+                    { brand: "BMW", model: "R 1250 GS", years: ["2019", "2020", "2021", "2022", "2023"] }
+                ],
+                description: "Desenvolvido em tubo de aço carbono de 22mm de diâmetro para proteção em quedas e impactos laterais."
+            }
+        ];
+
+        /* ==========================================================================
+           BIKE MATRIX DATA
+           ========================================================================== */
+        const bikeData = {
+            "Honda": {
+                "Titan 160": ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+                "Fan 160": ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+                "XRE 300": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
+            },
+            "Yamaha": {
+                "Fazer 250": ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+                "MT-07": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+            },
+            "Kawasaki": {
+                "Ninja 400": ["2019", "2020", "2021", "2022", "2023", "2024"],
+                "Z900": ["2018", "2019", "2020", "2021", "2022", "2023"]
+            },
+            "BMW": {
+                "R 1250 GS": ["2019", "2020", "2021", "2022", "2023", "2024"],
+                "S1000RR": ["2018", "2019", "2020", "2021", "2022", "2023"]
+            }
+        };
+
+        const categories = ["Todos", "Transmissão", "Escapamento", "Freios", "Pneus", "Equipamentos", "Motor", "Suspensão", "Acessórios"];
+
+        /* ==========================================================================
+           GLOBAL STATE MANAGEMENT
+           ========================================================================== */
+        let cart = [];
+        let wishlist = [];
+        let selectedCategory = "Todos";
+        let activeBikeFilter = { brand: "", model: "", year: "" };
+        let searchQuery = "";
+        let shippingCost = 0;
+        let couponDiscountRate = 0;
+
+        /* ==========================================================================
+           INITIALIZATION
+           ========================================================================== */
+        window.onload = function() {
+            renderCategoryPills();
+            renderProducts();
+            updateCartUI();
+        };
+
+        /* ==========================================================================
+           TOAST NOTIFICATION ENGINE
+           ========================================================================== */
+        function showToast(message, type = "success") {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            toast.className = `toast-animate flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl text-xs font-black border ${
+                type === "success" 
+                ? "bg-diego-dark border-emerald-500 text-emerald-400" 
+                : "bg-diego-dark border-diego-orange text-diego-orange"
+            }`;
+            
+            toast.innerHTML = `
+                <i class="${type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-info'} text-base"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        /* ==========================================================================
+           CATEGORY PILLS RENDER
+           ========================================================================== */
+        function renderCategoryPills() {
+            const container = document.getElementById("categoryPills");
+            container.innerHTML = categories.map(cat => {
+                const isActive = cat === selectedCategory;
+                return `
+                    <button onclick="filterByCategory('${cat}')" 
+                        class="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider whitespace-nowrap transition border ${
+                            isActive 
+                            ? 'bg-diego-orange text-white border-diego-orange shadow-lg neon-glow' 
+                            : 'bg-diego-card text-diego-muted border-diego-border hover:border-diego-orange hover:text-white'
+                        }">
+                        ${cat}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function filterByCategory(cat) {
+            selectedCategory = cat;
+            renderCategoryPills();
+            renderProducts();
+        }
+
+        /* ==========================================================================
+           BIKE SELECTOR LOGIC
+           ========================================================================== */
+        function updateModelOptions() {
+            const brandSelect = document.getElementById("selectBrand");
+            const modelSelect = document.getElementById("selectModel");
+            const yearSelect = document.getElementById("selectYear");
+
+            const selectedBrand = brandSelect.value;
+            modelSelect.innerHTML = '<option value="">Selecione o Modelo</option>';
+            yearSelect.innerHTML = '<option value="">Selecione o Ano</option>';
+            yearSelect.disabled = true;
+
+            if (selectedBrand && bikeData[selectedBrand]) {
+                modelSelect.disabled = false;
+                Object.keys(bikeData[selectedBrand]).forEach(model => {
+                    const opt = document.createElement("option");
+                    opt.value = model;
+                    opt.textContent = model;
+                    modelSelect.appendChild(opt);
+                });
+            } else {
+                modelSelect.disabled = true;
+            }
+        }
+
+        function updateYearOptions() {
+            const brandSelect = document.getElementById("selectBrand").value;
+            const modelSelect = document.getElementById("selectModel").value;
+            const yearSelect = document.getElementById("selectYear");
+
+            yearSelect.innerHTML = '<option value="">Selecione o Ano</option>';
+
+            if (brandSelect && modelSelect && bikeData[brandSelect][modelSelect]) {
+                yearSelect.disabled = false;
+                bikeData[brandSelect][modelSelect].forEach(year => {
+                    const opt = document.createElement("option");
+                    opt.value = year;
+                    opt.textContent = year;
+                    yearSelect.appendChild(opt);
+                });
+            } else {
+                yearSelect.disabled = true;
+            }
+        }
+
+        function applyBikeFilter() {
+            const brand = document.getElementById("selectBrand").value;
+            const model = document.getElementById("selectModel").value;
+            const year = document.getElementById("selectYear").value;
+
+            if (!brand) {
+                showToast("Selecione ao menos a marca da sua moto", "info");
+                return;
+            }
+
+            activeBikeFilter = { brand, model, year };
+
+            const banner = document.getElementById("activeBikeBanner");
+            const text = document.getElementById("activeBikeText");
+            banner.classList.remove("hidden");
+            text.innerHTML = `Filtro de Moto Ativo: <strong>${brand} ${model} ${year}</strong>`;
+
+            showToast(`Filtro aplicado para ${brand} ${model}`, "success");
+            renderProducts();
+        }
+
+        function resetBikeFilter() {
+            document.getElementById("selectBrand").value = "";
+            document.getElementById("selectModel").innerHTML = '<option value="">Selecione a Marca</option>';
+            document.getElementById("selectModel").disabled = true;
+            document.getElementById("selectYear").innerHTML = '<option value="">Selecione o Modelo</option>';
+            document.getElementById("selectYear").disabled = true;
+
+            activeBikeFilter = { brand: "", model: "", year: "" };
+            document.getElementById("activeBikeBanner").classList.add("hidden");
+
+            renderProducts();
+        }
+
+        function resetAllFilters() {
+            selectedCategory = "Todos";
+            searchQuery = "";
+            document.getElementById("searchInput").value = "";
+            document.getElementById("mobileSearchInput").value = "";
+            resetBikeFilter();
+            renderCategoryPills();
+            renderProducts();
+        }
+
+        /* ==========================================================================
+           LIVE SEARCH ENGINE
+           ========================================================================== */
+        function handleSearch() {
+            const input = document.getElementById("searchInput");
+            const clearBtn = document.getElementById("clearSearchBtn");
+            const dropdown = document.getElementById("searchDropdown");
+
+            searchQuery = input.value.trim().toLowerCase();
+
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove("hidden");
+                dropdown.classList.remove("hidden");
+
+                const filtered = products.filter(p => 
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.brand.toLowerCase().includes(searchQuery) ||
+                    p.category.toLowerCase().includes(searchQuery)
+                );
+
+                if (filtered.length > 0) {
+                    dropdown.innerHTML = filtered.slice(0, 5).map(p => `
+                        <div onclick="quickView(${p.id}); closeSearchDropdown();" class="flex items-center gap-3 p-3 hover:bg-diego-dark cursor-pointer border-b border-diego-border/50 transition">
+                            <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-diego-border" alt="${p.name}">
+                            <div class="flex-1">
+                                <p class="text-xs font-bold text-white line-clamp-1">${p.name}</p>
+                                <p class="text-[10px] text-diego-muted">${p.brand} • <span class="text-diego-orange font-bold">R$ ${p.pricePix.toFixed(2)}</span> no PIX</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    dropdown.innerHTML = `<div class="p-3 text-xs text-diego-muted text-center">Nenhum produto encontrado para "${searchQuery}"</div>`;
+                }
+
+            } else {
+                clearBtn.classList.add("hidden");
+                dropdown.classList.add("hidden");
+            }
+
+            renderProducts();
+        }
+
+        function handleMobileSearch() {
+            searchQuery = document.getElementById("mobileSearchInput").value.trim().toLowerCase();
+            renderProducts();
+        }
+
+        function clearSearch() {
+            document.getElementById("searchInput").value = "";
+            document.getElementById("clearSearchBtn").classList.add("hidden");
+            document.getElementById("searchDropdown").classList.add("hidden");
+            searchQuery = "";
+            renderProducts();
+        }
+
+        function closeSearchDropdown() {
+            document.getElementById("searchDropdown").classList.add("hidden");
+        }
+
+        /* ==========================================================================
+           MAIN PRODUCTS RENDER FUNCTION
+           ========================================================================== */
+        function renderProducts() {
+            const grid = document.getElementById("productGrid");
+            const emptyState = document.getElementById("emptyState");
+            const sortVal = document.getElementById("sortSelect").value;
+
+            // Filter Logic
+            let list = products.filter(p => {
+                if (selectedCategory !== "Todos" && p.category !== selectedCategory) {
+                    return false;
+                }
+
+                if (searchQuery) {
+                    const matchName = p.name.toLowerCase().includes(searchQuery);
+                    const matchBrand = p.brand.toLowerCase().includes(searchQuery);
+                    const matchCat = p.category.toLowerCase().includes(searchQuery);
+                    if (!matchName && !matchBrand && !matchCat) return false;
+                }
+
+                if (activeBikeFilter.brand) {
+                    if (p.compatibleBikes.length === 0) return true; // Universal
+
+                    const isCompatible = p.compatibleBikes.some(b => {
+                        const brandMatch = b.brand.toLowerCase() === activeBikeFilter.brand.toLowerCase();
+                        const modelMatch = !activeBikeFilter.model || b.model.toLowerCase() === activeBikeFilter.model.toLowerCase();
+                        const yearMatch = !activeBikeFilter.year || b.years.includes(activeBikeFilter.year);
+                        return brandMatch && modelMatch && yearMatch;
+                    });
+
+                    if (!isCompatible) return false;
+                }
+
+                return true;
+            });
+
+            // Sorting Logic
+            if (sortVal === "price-asc") {
+                list.sort((a, b) => a.pricePix - b.pricePix);
+            } else if (sortVal === "price-desc") {
+                list.sort((a, b) => b.pricePix - a.pricePix);
+            } else if (sortVal === "rating") {
+                list.sort((a, b) => b.rating - a.rating);
+            }
+
+            // Update Counter
+            document.getElementById("productCountText").innerText = `Exibindo ${list.length} de ${products.length} produtos em destaque`;
+
+            if (list.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+
+            grid.innerHTML = list.map(p => {
+                const isLiked = wishlist.includes(p.id);
+                return `
+                    <div class="bg-diego-card border border-diego-border rounded-2xl overflow-hidden shadow-xl hover:border-diego-orange/60 transition-all duration-300 group flex flex-col justify-between relative">
+                        
+                        <!-- Badges -->
+                        <div class="absolute top-3 left-3 z-10 flex flex-col gap-1">
+                            <span class="bg-diego-orange text-black font-black text-[10px] px-2 py-0.5 rounded uppercase tracking-widest shadow-md">
+                                10% OFF PIX
+                            </span>
+                            ${p.compatibleBikes.length > 0 ? `
+                                <span class="bg-black/90 backdrop-blur-md text-emerald-400 border border-emerald-500/30 font-bold text-[9px] px-2 py-0.5 rounded">
+                                    <i class="fa-solid fa-check"></i> Compatível
+                                </span>
+                            ` : `
+                                <span class="bg-black/90 text-gray-300 font-bold text-[9px] px-2 py-0.5 rounded">
+                                    Universal
+                                </span>
+                            `}
+                        </div>
+
+                        <!-- Wishlist Heart Button -->
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 text-white hover:text-diego-orange flex items-center justify-center transition border border-white/10">
+                            <i class="${isLiked ? 'fa-solid text-diego-orange' : 'fa-regular'} fa-heart"></i>
+                        </button>
+
+                        <div>
+                            <!-- Image Container -->
+                            <div class="relative overflow-hidden h-48 bg-black/40 cursor-pointer" onclick="quickView(${p.id})">
+                                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                    <span class="bg-white/90 text-black font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-lg">
+                                        <i class="fa-regular fa-eye mr-1"></i> Espiar Peça
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-4">
+                                <div class="flex items-center justify-between text-xs text-diego-muted mb-1.5">
+                                    <span class="font-black uppercase tracking-wider text-diego-orange">${p.brand}</span>
+                                    <div class="flex items-center gap-1 text-diego-yellow">
+                                        <i class="fa-solid fa-star text-[10px]"></i>
+                                        <span class="font-bold text-white text-xs">${p.rating.toFixed(1)}</span>
+                                        <span class="text-diego-muted text-[10px]">(${p.reviewsCount})</span>
+                                    </div>
+                                </div>
+
+                                <h3 onclick="quickView(${p.id})" class="font-bold text-white text-sm hover:text-diego-orange transition cursor-pointer line-clamp-2 h-10 leading-snug">
+                                    ${p.name}
+                                </h3>
+
+                                <!-- Price Box -->
+                                <div class="mt-4 pt-3 border-t border-diego-border/60">
+                                    <span class="text-xs text-diego-muted line-through">De: R$ ${p.priceOriginal.toFixed(2)}</span>
+                                    <div class="flex items-baseline gap-1.5">
+                                        <span class="text-2xl font-black text-diego-orange tracking-tight">R$ ${p.pricePix.toFixed(2)}</span>
+                                        <span class="text-[10px] text-emerald-400 font-extrabold uppercase">no PIX</span>
+                                    </div>
+                                    <p class="text-[10px] text-diego-muted mt-0.5">ou 10x de R$ ${(p.priceOriginal / 10).toFixed(2)} sem juros</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Action -->
+                        <div class="p-4 pt-0">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-diego-orange hover:bg-diego-orangeHover text-white font-black py-2.5 rounded-xl text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 neon-glow-hover">
+                                <i class="fa-solid fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* ==========================================================================
+           CART DRAWER ENGINE
+           ========================================================================== */
+        function toggleCartDrawer() {
+            document.getElementById("cartDrawer").classList.toggle("hidden");
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            showToast(`${product.name.slice(0, 25)}... adicionado!`);
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById("couponInput").value.trim().toUpperCase();
+            const msg = document.getElementById("couponMsg");
+
+            if (code === "DIEGO10") {
+                couponDiscountRate = 0.10;
+                msg.innerText = "✓ Cupom DIEGO10 aplicado com sucesso (10% OFF)!";
+                msg.className = "text-[11px] font-bold text-emerald-400 block";
+                showToast("Cupom DIEGO10 Aplicado!", "success");
+            } else {
+                couponDiscountRate = 0;
+                msg.innerText = "✕ Cupom inválido ou expirado.";
+                msg.className = "text-[11px] font-bold text-red-400 block";
+            }
+            updateCartUI();
+        }
+
+        function calculateShipping() {
+            const cep = document.getElementById("cepInput").value.replace(/\D/g, '');
+            const result = document.getElementById("shippingResult");
+
+            if (cep.length !== 8) {
+                showToast("Digite um CEP válido com 8 números", "info");
+                return;
+            }
+
+            const currentSubtotal = cart.reduce((acc, i) => acc + (i.priceOriginal * i.quantity), 0);
+            if (currentSubtotal >= 299 || currentSubtotal === 0) {
+                shippingCost = 0;
+                result.innerHTML = `<i class="fa-solid fa-truck"></i> Frete Grátis DIEGOMOTOPECAS (2 a 4 dias úteis)`;
+            } else {
+                shippingCost = 24.90;
+                result.innerHTML = `<i class="fa-solid fa-truck"></i> Frete Fixo Sedex Expresso: R$ 24,90 (2 dias)`;
+            }
+
+            result.classList.remove("hidden");
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsList = document.getElementById("cartItemsList");
+            const totalItemsCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+            document.getElementById("cartBadge").innerText = totalItemsCount;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="text-center py-16 text-diego-muted">
+                        <i class="fa-solid fa-cart-arrow-down text-5xl text-diego-border mb-3"></i>
+                        <p class="text-sm font-bold text-white">Seu carrinho está vazio.</p>
+                        <p class="text-xs text-diego-muted mt-1">Navegue pelas ofertas da DIEGOMOTOPECAS e adicione peças!</p>
+                    </div>
+                `;
+            } else {
+                cartItemsList.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-3 bg-diego-dark p-3 rounded-xl border border-diego-border">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded-lg border border-diego-border" alt="${item.name}">
+                        <div class="flex-1">
+                            <h4 class="text-xs font-bold text-white line-clamp-1">${item.name}</h4>
+                            <p class="text-[11px] text-diego-orange font-black mt-0.5">R$ ${item.pricePix.toFixed(2)} <span class="text-[9px] text-emerald-400 font-normal">no PIX</span></p>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateCartQuantity(${item.id}, -1)" class="w-5 h-5 bg-diego-card text-gray-300 rounded hover:bg-diego-orange hover:text-white flex items-center justify-center text-xs font-bold">-</button>
+                                <span class="text-xs font-bold text-white px-1">${item.quantity}</span>
+                                <button onclick="updateCartQuantity(${item.id}, 1)" class="w-5 h-5 bg-diego-card text-gray-300 rounded hover:bg-diego-orange hover:text-white flex items-center justify-center text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-diego-muted hover:text-red-500 p-1 transition">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Calculations
+            const subtotalOriginal = cart.reduce((acc, i) => acc + (i.priceOriginal * i.quantity), 0);
+            const couponValue = subtotalOriginal * couponDiscountRate;
+            
+            const subtotalAfterCoupon = subtotalOriginal - couponValue;
+            const pixDiscountValue = subtotalAfterCoupon * 0.10; // Extra 10% for PIX
+            const finalTotal = subtotalAfterCoupon - pixDiscountValue + shippingCost;
+
+            document.getElementById("cartSubtotal").innerText = `R$ ${subtotalOriginal.toFixed(2)}`;
+            
+            const couponRow = document.getElementById("couponDiscountRow");
+            if (couponDiscountRate > 0) {
+                couponRow.classList.remove("hidden");
+                document.getElementById("cartCouponDiscount").innerText = `- R$ ${couponValue.toFixed(2)}`;
+            } else {
+                couponRow.classList.add("hidden");
+            }
+
+            document.getElementById("cartShippingValue").innerText = shippingCost > 0 ? `R$ ${shippingCost.toFixed(2)}` : 'Grátis';
+            document.getElementById("cartPixDiscount").innerText = `- R$ ${pixDiscountValue.toFixed(2)}`;
+            document.getElementById("cartTotal").innerText = `R$ ${finalTotal.toFixed(2)}`;
+            document.getElementById("cartHeaderTotal").innerText = `R$ ${finalTotal.toFixed(2)}`;
+        }
+
+        /* ==========================================================================
+           QUICK VIEW MODAL LOGIC
+           ========================================================================== */
+        function quickView(productId) {
+            const p = products.find(prod => prod.id === productId);
+            if (!p) return;
+
+            const modal = document.getElementById("quickViewModal");
+            const content = document.getElementById("quickViewContent");
+
+            content.innerHTML = `
+                <div>
+                    <img src="${p.image}" class="w-full h-64 object-cover rounded-xl border border-diego-border" alt="${p.name}">
+                </div>
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black text-diego-orange uppercase tracking-wider">${p.brand} • ${p.category}</span>
+                        <h2 class="text-lg font-bold text-white mt-1 leading-snug">${p.name}</h2>
+                        <p class="text-xs text-diego-muted mt-2 leading-relaxed">${p.description}</p>
+                        
+                        <div class="mt-4 p-3.5 bg-diego-dark rounded-xl border border-diego-border">
+                            <span class="text-xs text-diego-muted line-through">De: R$ ${p.priceOriginal.toFixed(2)}</span>
+                            <div class="text-2xl font-black text-diego-orange">R$ ${p.pricePix.toFixed(2)} <span class="text-xs font-normal text-emerald-400">no PIX</span></div>
+                        </div>
+
+                        ${p.compatibleBikes.length > 0 ? `
+                            <div class="mt-3">
+                                <p class="text-[11px] font-bold text-white mb-1">Compatibilidade Confirmada:</p>
+                                <div class="flex flex-wrap gap-1">
+                                    ${p.compatibleBikes.map(b => `<span class="text-[10px] bg-diego-border text-gray-200 px-2 py-0.5 rounded">${b.brand} ${b.model}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="mt-6">
+                        <button onclick="addToCart(${p.id}); closeQuickView();" class="w-full bg-diego-orange hover:bg-diego-orangeHover text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition neon-glow">
+                            <i class="fa-solid fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove("hidden");
+        }
+
+        function closeQuickView() {
+            document.getElementById("quickViewModal").classList.add("hidden");
+        }
+
+        /* ==========================================================================
+           WISHLIST LOGIC
+           ========================================================================== */
+        function toggleWishlist(productId) {
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                showToast("Removido dos favoritos", "info");
+            } else {
+                wishlist.push(productId);
+                showToast("Adicionado aos favoritos!");
+            }
+
+            const badge = document.getElementById("wishlistBadge");
+            if (wishlist.length > 0) {
+                badge.innerText = wishlist.length;
+                badge.classList.remove("hidden");
+            } else {
+                badge.classList.add("hidden");
+            }
+
+            renderProducts();
+        }
+
+        function openWishlistModal() {
+            const modal = document.getElementById("wishlistModal");
+            const list = document.getElementById("wishlistList");
+
+            if (wishlist.length === 0) {
+                list.innerHTML = `<p class="text-xs text-diego-muted text-center py-6">Sua lista de desejos está vazia.</p>`;
+            } else {
+                const favProducts = products.filter(p => wishlist.includes(p.id));
+                list.innerHTML = favProducts.map(p => `
+                    <div class="flex items-center justify-between bg-diego-dark p-3 rounded-xl border border-diego-border">
+                        <div class="flex items-center gap-3">
+                            <img src="${p.image}" class="w-12 h-12 object-cover rounded-lg border border-diego-border" alt="${p.name}">
+                            <div>
+                                <h4 class="text-xs font-bold text-white line-clamp-1">${p.name}</h4>
+                                <p class="text-xs text-diego-orange font-black">R$ ${p.pricePix.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <button onclick="addToCart(${p.id}); closeWishlistModal();" class="bg-diego-orange text-white text-xs font-bold p-2.5 rounded-xl">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            modal.classList.remove("hidden");
+        }
+
+        function closeWishlistModal() {
+            document.getElementById("wishlistModal").classList.add("hidden");
+        }
+
+        /* ==========================================================================
+           CHECKOUT INTEGRATION
+           ========================================================================== */
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showToast("Seu carrinho está vazio!", "info");
+                return;
+            }
+
+            let message = "🏁 *NOVO PEDIDO - DIEGOMOTOPECAS*\n\n";
+            cart.forEach(item => {
+                message += `• ${item.quantity}x ${item.name} - R$ ${(item.pricePix * item.quantity).toFixed(2)}\n`;
+            });
+
+            const subtotalOriginal = cart.reduce((acc, i) => acc + (i.priceOriginal * i.quantity), 0);
+            const couponValue = subtotalOriginal * couponDiscountRate;
+            const subtotalAfterCoupon = subtotalOriginal - couponValue;
+            const pixDiscountValue = subtotalAfterCoupon * 0.10;
+            const finalTotal = subtotalAfterCoupon - pixDiscountValue + shippingCost;
+
+            if (activeBikeFilter.brand) {
+                message += `\n🏍️ *Moto do Cliente:* ${activeBikeFilter.brand} ${activeBikeFilter.model} ${activeBikeFilter.year}\n`;
+            }
+
+            message += `\n*TOTAL COM DESCONTO PIX: R$ ${finalTotal.toFixed(2)}*`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/5511999999999?text=${encoded}`, '_blank');
+        }
